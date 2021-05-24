@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="tm"> 
+	<insert id="insertDB" parameterType="String">
+				<!-- 전달받은 데이터(data1)의 타입 ▲ -->
+		INSERT INTO TESTTABLE(COL1) VALUES(#{data1})
+		<!-- 실제 수행할 SQL쿼리문. 
+			반드시 #을 붙이고 중괄호 안에는 변수이름과 똑같이
+			끝에 ; 붙이지 않기!	-->
+	<!-- 입력데이터가 실행되면 data1이 호출되고 이 쿼리가 DB로 전달. -->		
+	</insert>
+	
+ </mapper>
+ 
