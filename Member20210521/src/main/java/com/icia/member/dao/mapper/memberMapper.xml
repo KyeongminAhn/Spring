@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="member"> 
+	<insert id="insertDB" parameterType="memberdto">
+		INSERT INTO MEMBER210521(MID, MPASSWORD, MNAME, MEMAIL) VALUES(#{mid}, #{mPassword}, #{mName}, #{mEmail})
+	</insert>
+	
+	<select id="selectDB" resultType="memberdto">
+		SELECT * FROM MEMBER210521
+	</select>
+	
+ </mapper>
+ 
