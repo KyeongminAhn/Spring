@@ -2,15 +2,15 @@ package com.icia.member.dto;
 
 public class MemberDTO {
 
-	private String mid;
+	private String mId;
 	private String mPassword;
 	private String mName;
 	private String mEmail;
-	public String getMid() {
-		return mid;
+	public String getmId() {
+		return mId;
 	}
-	public void setMid(String mid) {
-		this.mid = mid;
+	public void setmId(String mId) {
+		this.mId = mId;
 	}
 	public String getmPassword() {
 		return mPassword;
@@ -32,6 +32,6 @@ public class MemberDTO {
 	}
 	@Override
 	public String toString() {
-		return "MemberDTO [mid=" + mid + ", mPassword=" + mPassword + ", mName=" + mName + ", mEmail=" + mEmail + "]";
+		return "MemberDTO [mId=" + mId + ", mPassword=" + mPassword + ", mName=" + mName + ", mEmail=" + mEmail + "]";
 	}
 }

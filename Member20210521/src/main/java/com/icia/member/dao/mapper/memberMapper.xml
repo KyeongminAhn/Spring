@@ -4,11 +4,15 @@
  
  <mapper namespace="member"> 
 	<insert id="insertDB" parameterType="memberdto">
-		INSERT INTO MEMBER210521(MID, MPASSWORD, MNAME, MEMAIL) VALUES(#{mid}, #{mPassword}, #{mName}, #{mEmail})
+		INSERT INTO MEMBER210521(MID, MPASSWORD, MNAME, MEMAIL) VALUES(#{mId}, #{mPassword}, #{mName}, #{mEmail})
 	</insert>
 	
 	<select id="selectDB" resultType="memberdto">
-		SELECT * FROM MEMBER210521
+		SELECT * FROM MEMBER210521 ORDER BY MID ASC
+	</select>
+	
+	<select id="memberview" parameterType="String" resultType="memberdto">
+		SELECT * FROM MEMBER210521 WHERE MID=#{mId}
 	</select>
 	
  </mapper>

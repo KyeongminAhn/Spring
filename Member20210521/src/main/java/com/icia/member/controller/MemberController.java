@@ -41,4 +41,10 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/memberview")
+	public ModelAndView memberView(@RequestParam("mId") String mId) {
+		mav = ms.memberView(mId);
+		return mav;
+	}
+	
 }

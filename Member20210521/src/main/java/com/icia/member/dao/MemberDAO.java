@@ -22,4 +22,8 @@ public class MemberDAO {
 		return sql.selectList("member.selectDB");
 	}
 
+	public MemberDTO memberView(String mId) {
+		return sql.selectOne("member.memberview", mId);
+	}
+
 }

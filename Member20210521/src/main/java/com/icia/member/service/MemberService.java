@@ -17,7 +17,7 @@ public class MemberService {
 	
 	private ModelAndView mav;
 
-	public void insert1(String mid, String mpassword, String mName, String mEmail) {
+	public void insert1(String mId, String mpassword, String mName, String mEmail) {
 
 	}
 	
@@ -36,6 +36,21 @@ public class MemberService {
 		
 		mav.addObject("mList", memberList);
 		mav.setViewName("memberList");
+		
+		return mav;
+	}
+	
+	public ModelAndView memberView(String mId) {
+		mav = new ModelAndView();
+		
+		// 한 명 회원에 대한 정보만 필요하기 때문에 DTO타입의 객체로 리턴 받음.
+		// List // DTO 구분짓기 다수 // 하나
+		MemberDTO member = mdao.memberView(mId);
+		
+		// DB 조회 결과를 member에 받았고
+		// member를 담아서 memberview.jsp로 가야함.
+		mav.addObject("result", member);
+		mav.setViewName("memberview");
 		
 		return mav;
 	}

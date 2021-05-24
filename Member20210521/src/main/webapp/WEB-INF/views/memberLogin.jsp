@@ -9,7 +9,7 @@
 <body>
 	<h2>memberLogin.jsp</h2>
 	<form action="memberLogin" method="post">
-		아이디: <input type="text" name="mid"> <br>
+		아이디: <input type="text" name="mId"> <br>
 		비밀번호: <input type="text" name="mPassword"> <br>
 		<input type="submit" value="로그인">
 	</form>
