@@ -31,7 +31,7 @@ public class MemberService {
 		insertResult = mdao.insertDB(dto);
 		if(insertResult > 0) {
 			// insertResult 가 0보다 크다는 것은 insert를 성공했다는 의미이기 때문에 회원가입이 완료된것으로 판단 
-			mav.setViewName("memberlogin");
+			mav.setViewName("memberLogin");
 		} else { 
 			// insertResult 가 0이라는 의미는 insert가 실패했다는 의미
 			mav.setViewName("joinfail");
@@ -109,7 +109,7 @@ public class MemberService {
 //		b=(int) a;
 		
 		// update() 메소드에서는 현재 로그인한 회원의 전체 정보를 DB로부터 가져와서
-		// memberupdate.jsp에 출력하느 것이 목적이기 때문에 memberview 메소드를 사용해도 문제 없음.
+		// memberupdate.jsp에 출력하는 것이 목적이기 때문에 memberview 메소드를 사용해도 문제 없음.
 //		MemberDTO memberUpdate = mdao.memberView(loginId);
 		MemberDTO memberUpdate = mdao.update(loginId);
 		
@@ -143,7 +143,7 @@ public class MemberService {
 //		mav.setViewName("memberList");
 		// 따라서 컨트롤러의 주소를 요청해야 함.
 		// 컨트롤러의 주소를 요청하기 위한 방법
-		mav.setViewName("redirect:/memberList");
+		mav.setViewName("redirect:/listpage");
 		return mav;
 	}
 
@@ -163,5 +163,10 @@ public class MemberService {
 		System.out.println("서비스클래스 체크결과" + result);
 		
 		return result;
+	}
+
+	public MemberDTO memberViewAjax(String mId) {
+		MemberDTO dto = mdao.memberView(mId);
+		return dto;
 	}
 }

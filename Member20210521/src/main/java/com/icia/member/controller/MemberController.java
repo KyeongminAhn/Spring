@@ -104,4 +104,17 @@ public class MemberController {
 		
 		return result;
 	}
+	
+	// ajax로 상세조회
+	@RequestMapping(value="/memberviewajax")
+	public @ResponseBody MemberDTO memberViewAjax(@RequestParam("mId") String mId) {
+		System.out.println("memberViewAjax 메소드 호출됨");
+		System.out.println("전달 id값 "+mId);
+		MemberDTO dto = ms.memberViewAjax(mId);
+		System.out.println(dto);
+		return dto;
+	}
+	
+	
+	
 }
