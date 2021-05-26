@@ -10,6 +10,7 @@
 <body>
 	<h2>memberview.jsp</h2>
 	<!-- 조회한 해당 회원의 정보만 출력 -->
+	<!-- EL(Expression Language) -->
 	아이디: ${result.mId} <br>
 	비밀번호: ${result.mPassword} <br>
 	이름: ${result.mName} <br>
