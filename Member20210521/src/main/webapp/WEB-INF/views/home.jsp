@@ -17,5 +17,6 @@
 	<a href="listpage">회원목록출력(memberList.jsp로 이동)</a> <br>
 	
 	로그인아이디: ${sessionScope.loginMember} <br>
+	<!-- 테스트입니다. -->
 </body>
 </html>
