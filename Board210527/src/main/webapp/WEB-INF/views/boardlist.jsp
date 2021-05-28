@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	function update() {
+		location.href="boardupdate";
+	}
+</script>
 <style>
 	table, tr, th, td {
 		border: 1px solid black;
@@ -19,17 +24,20 @@
 	<div>
 	<table>
 		<tr>
-			<th>글제목</th>
-			<th>글비번</th>
+			<th>글번호</th>
 			<th>작성자</th>
-			<th>내용</th>
+			<th>제목</th>
+			<th>작성일자</th>
+			<th>조회수</th>
 		</tr>
 		<c:forEach var="board" items="${boardList}">
 			<tr>
-				<td>${board.btitle}</td>
-				<td>${board.bpassword}</td>
+				<td>${board.bnumber}</td>
 				<td>${board.bwriter}</td>
-				<td>${board.bcontents}</td>
+				<!-- DB에서'내용'을 포함해 가져와야 하는 링크 -->
+				<td><a href="boardview?bnumber=${board.bnumber}">${board.btitle}</a></td>
+				<td>${board.bdate}</td>
+				<td>${board.bhits}</td>
 			</tr>	
 		</c:forEach>
 	</table>

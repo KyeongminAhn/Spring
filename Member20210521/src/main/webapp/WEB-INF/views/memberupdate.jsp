@@ -25,7 +25,7 @@
 	<h2>memberupdate.jsp</h2>
 	<!-- 비밀번호 입력란은 비워놓고 비밀번호를 사용자로부터 입력받아 DB에 저장된 정보와 일치하면
 			수정처리 진행, 일치하지 않으면 현재 페이지에 머무름. -->
-	<form action="updateprocess" method="post"name="updateform">
+	<form action="updateprocess" method="post" name="updateform">
 		아이디: <input type="text" name="mId" value="${member123.mId}" readonly> <br>
 		비밀번호: <input type="text" name="mPassword" id="pwd"> <br>
 		이름: <input type="text" name="mName" value="${member123.mName}" readonly> <br>

@@ -22,7 +22,23 @@ public class BoardDAO {
 	public List<BoardDTO> boardList() {
 		return sql.selectList("bm.boardlist");
 	}
+
+	// 조회수 업데이트 메소드
+	public void boardhits(int bnumber) {
+		sql.update("bm.boardhits", bnumber);
+	}
 	
+	public BoardDTO boardView(int bnumber) {
+		return sql.selectOne("bm.boardupdate", bnumber);
+	}
+
+	public List<BoardDTO> boardupdate() {
+		return sql.selectList("bm.boardupdate");
+	}
+	
+	public int updateProcess(BoardDTO board) {
+		return sql.update("bm.updateprocess", board);
+	}
 	
 	
 	
