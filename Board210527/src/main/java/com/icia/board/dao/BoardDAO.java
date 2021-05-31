@@ -29,20 +29,21 @@ public class BoardDAO {
 	}
 	
 	public BoardDTO boardView(int bnumber) {
-		return sql.selectOne("bm.boardupdate", bnumber);
-	}
-
-	public List<BoardDTO> boardupdate() {
-		return sql.selectList("bm.boardupdate");
+		return sql.selectOne("bm.boardview", bnumber);
 	}
 	
 	public int updateProcess(BoardDTO board) {
-		return sql.update("bm.updateprocess", board);
+		return sql.update("bm.boardupdate", board);
 	}
-	
-	
-	
-	
+
+	public int boardDelete(int bnumber) {
+		return sql.delete("bm.boarddelete", bnumber);
+	}
+
+	public void boardWriteFile(BoardDTO board) {
+		sql.insert("bm.boardwritefile", board);
+		
+	}
 	
 	
 	

@@ -44,5 +44,6 @@
 	</div>
 	
 	<a href="./">홈으로</a>
+	<a href="./writepage">글쓰기화면</a>
 </body>
 </html>

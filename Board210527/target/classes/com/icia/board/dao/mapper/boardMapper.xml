@@ -16,12 +16,21 @@
 		UPDATE BOARD210527 SET BHITS=BHITS+1 WHERE BNUMBER=#{bnumber}
 	</update>
 	
-	<select id="boardupdate" parameterType="int" resultType="boarddto">
+	<select id="boardview" parameterType="int" resultType="boarddto">
 		SELECT * FROM BOARD210527 WHERE BNUMBER=#{bnumber}
 	</select>
 	
-	<update id="updateprocess" parameterType="boarddto">
-		UPDATE BOARD210527 SET BTITLE=#{btitle} AND BCONTENTS=#{bcontents} WHERE BNUMBER=#{bnumber}
+	<update id="boardupdate" parameterType="boarddto">
+		UPDATE BOARD210527 SET BTITLE=#{btitle}, BCONTENTS=#{bcontents} WHERE BNUMBER=#{bnumber}
 	</update>
+	
+	<delete id="boarddelete" parameterType="int">
+		DELETE FROM BOARD210527 WHERE BNUMBER=#{bnumber}
+	</delete>
+	
+	<insert id="boardwritefile" parameterType="boarddto">
+		INSERT INTO BOARD210527(BNUMBER, BTITLE, BPASSWORD, BWRITER, BCONTENTS, BDATE, BHITS, BFILENAME) 
+			VALUES(BOARD210527_SEQ.NEXTVAL, #{btitle}, #{bpassword}, #{bwriter}, #{bcontents}, SYSDATE, 0, #{bfilename})
+	</insert>
 
 </mapper>
