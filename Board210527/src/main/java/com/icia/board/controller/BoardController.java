@@ -86,5 +86,12 @@ public class BoardController {
 		return mav;
 	}
 	
+	// 검색 처리
+	@RequestMapping(value="/search")
+	public ModelAndView boardSearch(@RequestParam("searchtype") String searchType, 
+									@RequestParam("keyword") String keyword) {
+		mav = bs.boardSearch(searchType, keyword);
+		return mav;
+	}
 	
 }

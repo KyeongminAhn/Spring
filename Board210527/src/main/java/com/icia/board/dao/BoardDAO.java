@@ -1,6 +1,7 @@
 package com.icia.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,10 @@ public class BoardDAO {
 
 	public List<BoardDTO> boardPaging(PageDTO paging) {
 		return sql.selectList("bm.boardpaging", paging);
+	}
+
+	public List<BoardDTO> boardSearch(Map<String, String> searchMap) {
+		return sql.selectList("bm.boardsearch", searchMap);
 	}
 	
 	

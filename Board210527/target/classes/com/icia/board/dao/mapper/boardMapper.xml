@@ -41,5 +41,24 @@
 		SELECT * FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC)
             AS RN FROM BOARD210527 B) WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
+	<select id="boardsearch" parameterType="java.util.HashMap" resultType="boarddto">
+		SELECT * FROM BOARD210527
+			<include refid="search"></include>
+	</select>
+	
+	<!-- 제목이냐 작성자냐에 따라 나눈거지, Map형태라서 나눈 게 아닌 점 참고! -->
+	<sql id="search">
+		<choose>
+			<when test="type=='btitle'">
+				WHERE BTITLE LIKE '%'||#{word}||'%'
+			</when>
+			<when test="type=='bwriter'">
+				WHERE BWRITER LIKE '%'||#{word}||'%'
+			</when>
+		</choose>
+	</sql>
+	
+	
 
 </mapper>

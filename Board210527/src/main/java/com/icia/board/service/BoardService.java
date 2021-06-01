@@ -2,7 +2,9 @@ package com.icia.board.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.board.dao.BoardDAO;
+import com.icia.board.dao.CommentDAO;
 import com.icia.board.dto.BoardDTO;
+import com.icia.board.dto.CommentDTO;
 import com.icia.board.dto.PageDTO;
 
 @Service
@@ -20,6 +24,8 @@ public class BoardService {
 
 	@Autowired
 	private BoardDAO bdao;
+	@Autowired
+	private CommentDAO cdao;
 	
 	private ModelAndView mav;
 	
@@ -61,6 +67,10 @@ public class BoardService {
 		
 		// 상세보기 후 목록으로 돌아갈 때 현재 페이지를 유지하기 위해 page도 같이 가져감.
 		mav.addObject("page", page);
+		
+		// boardview.jsp를 열 때 DB에 저장된 댓글 리스트도 함께 가져감.
+		List<CommentDTO> commentList = cdao.commentList(bnumber);
+		mav.addObject("commentList", commentList);
 		
 		mav.addObject("board", board);
 		mav.setViewName("boardview");
@@ -182,6 +192,25 @@ public class BoardService {
 		mav.addObject("paging", paging);
 		mav.addObject("boardList", boardList);
 		mav.setViewName("boardlistpaging");
+		
+		return mav;
+	}
+
+	// 검색기능 처리
+	public ModelAndView boardSearch(String searchType, String keyword) {
+		mav = new ModelAndView();
+		
+		// Map을 사용하여 mapper로 전달 (key와 value로 구성.)
+		// key: 데이터를 담아놓은 공간의 이름
+		// value: 실질데이터
+		Map<String, String> searchMap = new HashMap<String, String>();
+		searchMap.put("type", searchType);
+		searchMap.put("word", keyword);
+	
+		List<BoardDTO> boardList = bdao.boardSearch(searchMap);
+		
+		mav.addObject("boardList", boardList);
+		mav.setViewName("boardlist");
 		
 		return mav;
 	}
