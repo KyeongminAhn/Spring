@@ -49,10 +49,11 @@ public class BoardController {
 		return mav;
 	}
 	
-	// 글조회
+	// 글조회 (+페이징목록으로 돌아가기)
 	@RequestMapping(value="/boardview")
-	public ModelAndView boardView(@RequestParam("bnumber") int bnumber) {
-		mav = bs.boardView(bnumber);
+	public ModelAndView boardView(@RequestParam("bnumber") int bnumber,
+			@RequestParam(value="page", required=false, defaultValue="1") int page) {
+		mav = bs.boardView(bnumber, page);
 		return mav;
 	}
 	
@@ -62,6 +63,7 @@ public class BoardController {
 		mav = bs.boardUpdate(bnumber);
 		return mav;
 	}
+	
 	// 글수정 처리 메소드 
 	@RequestMapping(value="/updateprocess")
 	public ModelAndView updateProcess(@ModelAttribute BoardDTO board) {
@@ -76,5 +78,20 @@ public class BoardController {
 		return mav;
 	}
 	
+	// 페이징 처리
+	@RequestMapping(value="/paging")
+	public ModelAndView boardPaging(@RequestParam(value="page", required=false, defaultValue="1") int page) {
+	//												혹여나 page파라미터 전달받지 못하더라도 기본으로 보여줘야하는 페이지=첫 페이지(기본값)
+		mav =bs.boardPaging(page);
+		return mav;
+	}
+	
+	// 검색 처리
+	@RequestMapping(value="/search")
+	public ModelAndView boardSearch(@RequestParam("searchtype") String searchType, 
+									@RequestParam("keyword") String keyword) {
+		mav = bs.boardSearch(searchType, keyword);
+		return mav;
+	}
 	
 }

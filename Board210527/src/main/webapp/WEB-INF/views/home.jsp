@@ -13,5 +13,8 @@
 	<a href="writepage">글쓰기(boardwrite.jsp로 이동)</a> <br>
 	<!-- DB에서 정보를 가져와서 boardlist.jsp에 출력 -->
 	<a href="boardlist">글목록(boardlist.jsp로 이동)</a> <br>
+	
+	<a href="paging">페이징처리목록</a>
+	
 </body>
 </html>

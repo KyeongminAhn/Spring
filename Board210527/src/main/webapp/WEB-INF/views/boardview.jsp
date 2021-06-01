@@ -36,11 +36,84 @@
 	<a href="./">홈으로</a> <br>
 	<a href="boardlist">리스트로 돌아가기</a> <br>
 	
-	<!-- 수정버튼 만들고 수정기능 구현 -->
+	<!-- 수정링크/버튼 만들고 수정기능 구현 -->
 	<a href="boardupdate?bnumber=${board.bnumber}">수정</a> <br>
+	<button onclick="update()">수정버튼</button>
 	<!-- 1. 위의 수정링크를 클릭하면 Controller-Service-DAO-DB를 거쳐 데이터를 가지고 boardupdate.jsp를 출력함.
-		 2. 그리고 boardupda>te.jsp에서 수정할 내용을 입력받고 DB에 update 쿼리를 수행해줘야함. -->
+		 2. 그리고 boardupdate.jsp에서 수정할 내용을 입력받고 DB에 update 쿼리를 수행해줘야함. -->
 	<!-- 주소값 요청이 잘 이루어지고 있는지 확인! -->
-	<button onclick="boardDelete()">삭제</button>
+	<button onclick="boardDelete()">삭제</button> <br>
+	
+	<a href="paging?page=${page}">페이징목록으로 돌아가기</a>
+	
+	<!-- 댓글 등록(입력) 부분 -->
+	<div id="comment-write">
+		작성자: <input type="text" id="cwriter"> <br>
+		내용: <input type="text" id="ccontents"> <br>
+		<button id="cwrite-btn">댓글등록</button>
+	</div>
+	
+	<!-- 댓글 목록출력 부분 -->
+	<div id="comment-list">
+		<table border="1">
+			<tr>
+				<th>작성자</th>
+				<th>내용</th>
+			</tr>
+			<c:forEach var="comment" items="${commentList}">
+				<tr>
+					<td>${comment.cwriter}</td>
+					<td>${comment.ccontents}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+	
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#cwrite-btn").click(function(){
+			var cwriter = document.getElementById('cwriter').value;
+			var ccontents = document.getElementById('ccontents').value;
+			// 댓글테이블은 하나지만, 해당기사에서 작성한 댓글만 보여야 하기 때문에, 어떤 게시글에 대한 댓글인지 테이블에 insert 필요.
+			var cbnumber = '${board.bnumber}';
+			console.log(cwriter);
+			console.log(ccontents);
+			console.log(cbnumber);
+			$.ajax({
+				type: 'post',
+				// 주소값에 '/'
+				url: 'comment/commentwrite',
+				data:{
+					'cwriter': cwriter,
+					'ccontents': ccontents,
+					'cbnumber': cbnumber},
+				dataType: 'json',
+				success: function(list){
+					console.log(list);
+					var output = "<table border='1'>";
+					output += "<tr><th>작성자</th>";
+					output += "<th>내용</th></tr>";
+					for(var i in list){
+						output += "<tr>";
+						output += "<td>"+list[i].cwriter+"</td>";
+						output += "<td>"+list[i].ccontents+"</td>";
+						output += "</tr>";
+					}
+					output += "</table>";
+					document.getElementById('comment-list').innerHTML = output;
+					document.getElementById('cwriter').value='';
+					document.getElementById('ccontents').value='';
+				},
+				error: function(){
+					console.log('문제있음.');
+				}
+			});
+		});
+	});
+	
+</script>
+
+
 </body>
 </html>

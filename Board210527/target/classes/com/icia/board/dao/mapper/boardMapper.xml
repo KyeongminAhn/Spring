@@ -32,5 +32,33 @@
 		INSERT INTO BOARD210527(BNUMBER, BTITLE, BPASSWORD, BWRITER, BCONTENTS, BDATE, BHITS, BFILENAME) 
 			VALUES(BOARD210527_SEQ.NEXTVAL, #{btitle}, #{bpassword}, #{bwriter}, #{bcontents}, SYSDATE, 0, #{bfilename})
 	</insert>
+	
+	<select id="listcount" resultType="int">
+		SELECT COUNT(BNUMBER) FROM BOARD210527
+	</select>
+	
+	<select id="boardpaging" parameterType="pagedto" resultType="boarddto">
+		SELECT * FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC)
+            AS RN FROM BOARD210527 B) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="boardsearch" parameterType="java.util.HashMap" resultType="boarddto">
+		SELECT * FROM BOARD210527
+			<include refid="search"></include>
+	</select>
+	
+	<!-- 제목이냐 작성자냐에 따라 나눈거지, Map형태라서 나눈 게 아닌 점 참고! -->
+	<sql id="search">
+		<choose>
+			<when test="type=='btitle'">
+				WHERE BTITLE LIKE '%'||#{word}||'%'
+			</when>
+			<when test="type=='bwriter'">
+				WHERE BWRITER LIKE '%'||#{word}||'%'
+			</when>
+		</choose>
+	</sql>
+	
+	
 
 </mapper>
