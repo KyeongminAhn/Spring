@@ -27,6 +27,7 @@ public class HomeController {
 	 * 매번 new를 이용하여 객체를 만들지 않고도 Service 클래스의 자원 (필드, 메소드)을 활용할 수 있음.
 	 */
 	
+	// 기존 객체관리 방식
 	//	TestService에 있는 abc 라는 메소드를 호출하고 싶다면
 	//	TestService tts = new TestService();
 	//	tts.abc();

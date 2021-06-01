@@ -1,5 +1,7 @@
 package com.icia.board.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 //import lombok.Getter;
 //import lombok.Setter;
@@ -17,6 +19,12 @@ public class BoardDTO {
 	private String bcontents;
 	private String bdate;
 	private int bhits;
+	
+	// 파일을 담기 위한 필드(boardwrite.jsp에서 Controller로 전달할 때)
+	//(bfile 추가로 인한, file이 실제로 DB에 저장하는 건 아니다. filename만!)
+	private MultipartFile bfile;
+	// 파일명을 담기 위한 필드
+	private String bfilename;
 }
 	
 	//	public String getBtitle() {
